@@ -9,7 +9,6 @@ canvas.height = window.innerHeight
 console.log(c)
 
 
-
 class note {
     constructor(x, dy, radius, color){
         this.x = x
@@ -26,6 +25,7 @@ class note {
     }
     update(){
         this.y = this.y - this.dy
+        this.draw()
     }
 
 
@@ -52,7 +52,40 @@ class piano {
     }
 }
 
+class game {
+    constructor(bpm, Notes_per_beat){
+        this.bpm = bpm
+        this.time = 0
+        this.rhythm = Notes_per_beat
+    }
+    start(){
 
+    }
+    update(){
+       // this.time += 1
+        //check for hitting object
+    }
+}
+
+let notes = {
+    2 : "Pos_1",
+    5 : "Pos_2",
+    8 : "Pos_3",
+    12 : "Pos_1",
+    16 : "Pos_4",
+}
+
+var Game1 = new game(180, 4)
+
+
+const background = new Image()
+background.src = "./Background.jpg"
+background.onload = function(){
+    c.drawImage(background,0,0);   
+}
+// const Game = new game(stuff)
+//Updates each beat
+// setInterval(game.update(), (60*game.rhythm/game.bpm))
 
 const Pos_1 = canvas.width * (3/9)
 const Pos_2 = canvas.width * (4/9)
@@ -104,18 +137,37 @@ function keyUpHandler(event){
     }
 }
 
+
+tick = 0
+note_objects = []
+function Controller(){
+    tick += 1
+    for(i in notes){
+        if(tick == i){
+           //Trying to create a new object 
+           var NewNote = new note(notes[tick], 2.5, 20, 'red')
+           note_objects.push(NewNote)
+        }
+    }
+}
+//60 * game.rhythm * (10**3) ) / game.bpm
+setInterval(Controller,0.5 *(10**3))
+
 function loop() {
-    
     window.requestAnimationFrame(loop)
     c.clearRect(0,0, canvas.width, canvas.height)
-    TestNote.update()
-    TestNote.draw()
     
-    TestNote2.update()
-    TestNote2.draw()
+    c.drawImage(background,0,0); 
 
+    note_objects.forEach((x) =>{
+        x.update()
+    })
+
+    console.log(note_objects)
+
+    TestNote.update()
+    TestNote2.update()
     TestNote3.update()
-    TestNote3.draw()
 
     Piano1.draw()
     Piano2.draw()
@@ -123,4 +175,21 @@ function loop() {
     Piano4.draw()
 }
 window.requestAnimationFrame(loop)
-  
+
+function loop2(){
+    c.clearRect(0,0, canvas.width, canvas.height)
+    
+    c.drawImage(background,0,0); 
+
+    note_objects.forEach((x) =>{
+        x.update()
+    })
+
+    console.log(note_objects)
+
+    TestNote.update()
+    TestNote2.update()
+    TestNote3.update()
+}
+
+//setInterval(loop2, 20)

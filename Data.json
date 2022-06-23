@@ -1,0 +1,10 @@
+{
+    "notes":[
+        {"Pos_1": "0"},
+        {"Pos_3": "2"},
+        {"Pos_4": "4"}
+    ],
+    "bpm": 180,
+    "song": "Test.mp3",
+    "background": "Test.png"
+}
