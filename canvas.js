@@ -5,6 +5,7 @@ const c = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
+score = 0
 
 console.log(c)
 
@@ -26,10 +27,33 @@ class note {
     update(){
         this.y = this.y - this.dy
         this.draw()
+        if((Piano1.pressed == true)&&((parseFloat((canvas.height * 0.1)  - 11)) < parseFloat(this.y))&&(parseFloat(this.y) < ((parseFloat(canvas.height * 0.1)+11)))&&(this.x == Pos_1)){
+            this.y = -50
+            score += 100
+            console.log("true!!")
+            }
+        
+        if((Piano2.pressed == true)&&((parseFloat((canvas.height * 0.1)  - 11)) < parseFloat(this.y))&&(parseFloat(this.y) < ((parseFloat(canvas.height * 0.1)+11)))&&(this.x == Pos_2)){
+            this.y = -50
+            score += 100
+            console.log("true!!")
+            }
+        if((Piano3.pressed == true)&&((parseFloat((canvas.height * 0.1)  - 11)) < parseFloat(this.y))&&(parseFloat(this.y) < ((parseFloat(canvas.height * 0.1)+11)))&&(this.x == Pos_3)){
+            this.y = -50
+            score += 100
+            console.log("true!!")
+            }
+        if((Piano4.pressed == true)&&((parseFloat((canvas.height * 0.1)  - 11)) < parseFloat(this.y))&&(parseFloat(this.y) < ((parseFloat(canvas.height * 0.1)+11)))&&(this.x == Pos_4)){
+            this.y = -50
+            score += 100
+            console.log("true!!")
+            }
+
     }
-
-
 }
+
+
+
 
 class piano {
     constructor(x, button){
@@ -44,6 +68,7 @@ class piano {
         if(this.pressed){
             c.fillStyle = "red"
             c.fill()
+
         }
         else{
             c.strokeStyle = "red"
@@ -67,13 +92,7 @@ class game {
     }
 }
 
-let notes = {
-    2 : "Pos_1",
-    5 : "Pos_2",
-    8 : "Pos_3",
-    12 : "Pos_1",
-    16 : "Pos_4",
-}
+
 
 var Game1 = new game(180, 4)
 
@@ -91,6 +110,14 @@ const Pos_1 = canvas.width * (3/9)
 const Pos_2 = canvas.width * (4/9)
 const Pos_3 = canvas.width * (5/9)
 const Pos_4 = canvas.width * (6/9)
+
+let notes = {
+    2 : Pos_1,
+    5 : Pos_2,
+    8 : Pos_3,
+    12 : Pos_1,
+    16 : Pos_4,
+}
 
 
 const TestNote = new note(Pos_2, 3, 20, 'pink')
@@ -110,15 +137,31 @@ document.addEventListener('keyup', keyUpHandler, false);
 function keyDownHandler(event){
     if(event.key == "q"){
         Piano1.pressed = true
+        function piano1false(){
+            Piano1.pressed = false
+        }
+        setTimeout(piano1false, 50)
     }
     if(event.key == "w"){
         Piano2.pressed = true
+        function piano2false(){
+            Piano2.pressed = false
+        }
+        setTimeout(piano2false, 50)
     }
     if(event.key == "o"){
         Piano3.pressed = true
+        function piano3false(){
+            Piano3.pressed = false
+        }
+        setTimeout(piano3false, 50)
     }
     if(event.key == "p"){
         Piano4.pressed = true
+        function piano3false(){
+            Piano3.pressed = false
+        }
+        setTimeout(piano3false, 50)
     }
 }
 
@@ -145,7 +188,7 @@ function Controller(){
     for(i in notes){
         if(tick == i){
            //Trying to create a new object 
-           var NewNote = new note(notes[tick], 2.5, 20, 'red')
+           var NewNote = new note(notes[tick], 4, 22, 'pink')
            note_objects.push(NewNote)
         }
     }
@@ -162,8 +205,6 @@ function loop() {
     note_objects.forEach((x) =>{
         x.update()
     })
-
-    console.log(note_objects)
 
     TestNote.update()
     TestNote2.update()
