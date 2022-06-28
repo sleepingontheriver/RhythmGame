@@ -178,10 +178,10 @@ function keyDownHandler(event){
     }
     if(event.key == "p"){
         Piano4.pressed = true
-        function piano3false(){
-            Piano3.pressed = false
+        function piano4false(){
+            Piano4.pressed = false
         }
-        setTimeout(piano3false, 40)
+        setTimeout(piano4false, 40)
     }
 }
 
