@@ -5,6 +5,10 @@ const c = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
+
+c.font = "30px Inter";   
+
+
 score = 0
 
 console.log(c)
@@ -30,23 +34,19 @@ class note {
         if((Piano1.pressed == true)&&((parseFloat((canvas.height * 0.1)  - 11)) < parseFloat(this.y))&&(parseFloat(this.y) < ((parseFloat(canvas.height * 0.1)+11)))&&(this.x == Pos_1)){
             this.y = -50
             score += 100
-            console.log("true!!")
             }
         
         if((Piano2.pressed == true)&&((parseFloat((canvas.height * 0.1)  - 11)) < parseFloat(this.y))&&(parseFloat(this.y) < ((parseFloat(canvas.height * 0.1)+11)))&&(this.x == Pos_2)){
             this.y = -50
             score += 100
-            console.log("true!!")
             }
         if((Piano3.pressed == true)&&((parseFloat((canvas.height * 0.1)  - 11)) < parseFloat(this.y))&&(parseFloat(this.y) < ((parseFloat(canvas.height * 0.1)+11)))&&(this.x == Pos_3)){
             this.y = -50
             score += 100
-            console.log("true!!")
             }
         if((Piano4.pressed == true)&&((parseFloat((canvas.height * 0.1)  - 11)) < parseFloat(this.y))&&(parseFloat(this.y) < ((parseFloat(canvas.height * 0.1)+11)))&&(this.x == Pos_4)){
             this.y = -50
             score += 100
-            console.log("true!!")
             }
 
     }
@@ -117,6 +117,26 @@ let notes = {
     8 : Pos_3,
     12 : Pos_1,
     16 : Pos_4,
+    18 : Pos_1,
+    22 : Pos_2,
+    23 : Pos_3,
+    27 : Pos_1,
+    26 : Pos_4,
+    25 : Pos_1,
+    30 : Pos_2,
+    32 : Pos_3,
+    33 : Pos_1,
+    31 : Pos_4,
+    31 : Pos_1,
+    35 : Pos_2,
+    71 : Pos_3,
+    45 : Pos_1,
+    55 : Pos_4,
+    74 : Pos_1,
+    61 : Pos_2,
+    122 : Pos_3,
+    122 : Pos_1,
+    80 : Pos_4
 }
 
 
@@ -140,28 +160,28 @@ function keyDownHandler(event){
         function piano1false(){
             Piano1.pressed = false
         }
-        setTimeout(piano1false, 50)
+        setTimeout(piano1false, 40)
     }
     if(event.key == "w"){
         Piano2.pressed = true
         function piano2false(){
             Piano2.pressed = false
         }
-        setTimeout(piano2false, 50)
+        setTimeout(piano2false, 40)
     }
     if(event.key == "o"){
         Piano3.pressed = true
         function piano3false(){
             Piano3.pressed = false
         }
-        setTimeout(piano3false, 50)
+        setTimeout(piano3false, 40)
     }
     if(event.key == "p"){
         Piano4.pressed = true
         function piano3false(){
             Piano3.pressed = false
         }
-        setTimeout(piano3false, 50)
+        setTimeout(piano3false, 40)
     }
 }
 
@@ -214,6 +234,9 @@ function loop() {
     Piano2.draw()
     Piano3.draw()
     Piano4.draw()
+    c.fillStyle = "black"
+    c.fillText( "Score: " + score, canvas.width * 0.77, 50 );
+
 }
 window.requestAnimationFrame(loop)
 
